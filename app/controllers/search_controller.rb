@@ -6,9 +6,9 @@ class SearchController < ApplicationController
     @model = params[:model]
     @method = params[:method]
     if @model == "User"
-      @users = User.where(@word, @method)
+      @users = User.search_for(@word, @method)
     else
-      @books = Book.where(@word, @method)
+      @books = Book.search_for(@word, @method)
     end
   end
 end

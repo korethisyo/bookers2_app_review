@@ -14,4 +14,17 @@ class User < ApplicationRecord
 
   validates :name, uniqueness: true, length: {in: 2..20}
   validates :introduction, length: {maximum: 50}
+
+    def self.search_for(word, method)
+    if method == "perfect"
+      User.where(name: "#{word}")
+    elsif method == "forward"
+      User.where('name LIKE ?', "#{word}%")
+    elsif method == "backward"
+      User.where('name LIKE ?', "%#{word}")
+    else
+      User.where('name LIKE ?', "%#{word}%")
+    end
+  end
+
 end
